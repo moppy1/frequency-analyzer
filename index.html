@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <title>Frequency Analyzer</title>
+    
+    <meta charset="utf-8"/>
+    <meta name="description" content="FrequencyAnalyzer"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self';" />
+
+    <!-- 3rd CSS -->
+    <link rel="stylesheet" type="text/css" href="css/3rd/bootstrap-4.3.1.min.css">
+    <link rel="stylesheet" type="text/css" href="css/3rd/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="css/3rd/fontawesome-all-5.11.2.min.css">
+    <!-- Own CSS -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <!-- Favicon -->
+    <meta name="theme-color" content="#ffffff">
+    
+    <!-- 3rd JS -->
+    <script type="text/javascript" src="js/3rd/jquery-3.4.1.js"></script>
+    <!-- <script type="text/javascript" src="js/3rd/detect-browser.js"></script> -->
+    <script type="text/javascript" src="js/3rd/popper-1.14.7.min.js"></script>
+    <script type="text/javascript" src="js/3rd/bootstrap-4.3.1.min.js"></script>
+    <script type="text/javascript" src="js/3rd/bootstrap-select.js"></script>
+    <script type="text/javascript" src="js/3rd/Sortable.min.js"></script>
+    <script type="text/javascript" src="js/3rd/FileSaver.min.js"></script>
+    <!-- Own JS -->
+    <script type="text/javascript" src="js/main.js"></script>    
+    
+  </head>
+  <body>
+    <div class="jumbotron text-center">
+      <h1>Frequency Analyzer</h1>
+      <p>Ein Tool zum Erfassen der Peak-Frequenz</p>
+    </div>
+    <div class="container">
+      <h2 class="text-center" id="maxFreqDisplay">0Hz</h2>
+      <div class="progress">
+        <div class="progress-bar" id="liveFreqBar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="5000">0Hz</div>
+      </div>
+      <div class="m-4 d-flex justify-content-center">
+        <button type="button" class="btn btn-success mr-1" id="startBtn">START</button>
+        <button type="button" class="btn btn-secondary mr-1" id="pauseBtn">PAUSE</button>
+        <button type="button" class="btn btn-danger mr-1" id="resetBtn">RESET</button>
+      </div>     
+    </div>   
+  </body>
+</html>
