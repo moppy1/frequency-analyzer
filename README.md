@@ -1,1 +1,1 @@
-# frequency-analyzer
+# Frequency Analyzer
