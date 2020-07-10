@@ -4,11 +4,10 @@ class App
   {
     this.getUiElements();
     this.initControlButtons();
-    this.initMic(this);
+    this.initMicAsync();
     this.m_highestFreq = 0;
     this.m_maxFreqValue = 5000;
     this.m_hold = true;
-
     this.updateControlButtons();
   }
   getUiElements()
@@ -18,8 +17,22 @@ class App
     this.m_startBtn = $('#startBtn');
     this.m_pauseBtn = $('#pauseBtn');
     this.m_resetBtn = $('#resetBtn');
+    this.m_uilog = $('#log')
   }
-  initMic()
+  initMicAsync()
+  {     
+    navigator.mediaDevices.getUserMedia({video: false, audio: true})
+      .then((stream) => 
+      {
+        this.process(stream)
+      })
+      .catch((err) =>
+      {
+        console.log(err)
+      });
+  }
+  
+  initMicSync()
   {
     navigator.getUserMedia =  
       navigator.getUserMedia ||
@@ -30,7 +43,15 @@ class App
   }
   process(stream)
   {
-    let ctx = new AudioContext();
+    let isWebkit = false;
+    try
+    {
+      isWebkit = webkitAudioContext != undefined;
+    }
+    catch(err) {}
+    
+    let ctxX = isWebkit ? webkitAudioContext : AudioContext;
+    let ctx = new ctxX();
     let mic = ctx.createMediaStreamSource(stream);
     let analyser = ctx.createAnalyser();
     let osc = ctx.createOscillator();
@@ -40,7 +61,7 @@ class App
     //osc.start(0);
   
     let data = new Uint8Array(analyser.frequencyBinCount);
-  
+    
     let doAnalyzing = () => 
     {
       if(this.m_hold)
@@ -51,6 +72,7 @@ class App
         
 
       analyser.getByteFrequencyData(data);
+      
   
       // get fullest bin
       let idx = 0;
@@ -65,6 +87,8 @@ class App
       {
         this.m_highestFreq = frequency;        
       }
+      
+     
       this.updateUi(frequency);
 
       //osc.frequency.value = frequency;
